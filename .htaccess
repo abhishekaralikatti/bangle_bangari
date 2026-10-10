@@ -1,0 +1,9 @@
+RewriteEngine On
+RewriteBase /bangle_bangari/
+
+# Serve existing files/dirs directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Route everything else through CodeIgniter
+RewriteRule ^(.*)$ index.php/$1 [L]

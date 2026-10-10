@@ -1,0 +1,27 @@
+# Environment / secrets
+.env
+.env.*
+
+# CodeIgniter logs
+application/logs/*
+!application/logs/index.html
+
+# CodeIgniter cache
+application/cache/*
+!application/cache/index.html
+
+# Temporary files
+*.log
+*.tmp
+*.temp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE / editor
+.vscode/
+.idea/
+
+# Composer dependencies
+/vendor/

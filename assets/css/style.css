@@ -1,0 +1,375 @@
+/* ============================================================
+   Daily Horoscope App — Main Stylesheet
+   Deep cosmic theme: midnight navy + violet + gold accents
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ── CSS Variables ─────────────────────────────────────────── */
+:root {
+  --cosmos-bg:       #080818;
+  --cosmos-surface:  #111130;
+  --cosmos-card:     #16163a;
+  --cosmos-border:   #2a2a5a;
+  --cosmos-purple:   #6c3fc7;
+  --cosmos-violet:   #b068ff;
+  --cosmos-gold:     #f0c060;
+  --cosmos-text:     #d4c8f0;
+  --cosmos-muted:    #8080b0;
+  --cosmos-white:    #ffffff;
+  --cosmos-success:  #4caf82;
+  --cosmos-danger:   #e05c6a;
+  --grad-primary:    linear-gradient(135deg, #6c3fc7, #b068ff);
+  --grad-gold:       linear-gradient(135deg, #c88020, #f0c060);
+  --shadow-card:     0 8px 32px rgba(108, 63, 199, 0.18);
+  --shadow-hover:    0 12px 40px rgba(176, 104, 255, 0.28);
+  --radius-card:     16px;
+  --radius-pill:     50px;
+}
+
+/* ── Reset & Base ──────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  color: var(--cosmos-text);
+  background: var(--cosmos-bg);
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5 { color: var(--cosmos-white); }
+
+/* ── Auth Pages ────────────────────────────────────────────── */
+.auth-body {
+  background: radial-gradient(ellipse at 20% 20%, #1a0a3a 0%, #080818 60%),
+              radial-gradient(ellipse at 80% 80%, #0a1a3a 0%, transparent 60%);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Animated star field */
+.auth-stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px),
+    radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px),
+    radial-gradient(circle, rgba(176,104,255,0.6) 1px, transparent 1px);
+  background-size: 300px 300px, 200px 200px, 400px 400px;
+  background-position: 0 0, 50px 100px, 150px 50px;
+  animation: twinkle 8s ease-in-out infinite alternate;
+  z-index: 0;
+}
+@keyframes twinkle {
+  0%   { opacity: 0.4; }
+  100% { opacity: 0.9; }
+}
+
+.auth-card {
+  position: relative;
+  z-index: 1;
+  background: rgba(22, 22, 58, 0.92);
+  border: 1px solid var(--cosmos-border);
+  border-radius: var(--radius-card);
+  backdrop-filter: blur(20px);
+  max-width: 460px;
+  width: 100%;
+  color: var(--cosmos-text);
+}
+
+.zodiac-logo {
+  font-size: 48px;
+  background: var(--grad-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+@keyframes pulse-glow {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(176,104,255,0.5)); }
+  50%       { filter: drop-shadow(0 0 18px rgba(176,104,255,0.9)); }
+}
+
+.auth-card .form-label  { color: var(--cosmos-text); font-weight: 500; font-size: 13px; }
+.auth-card .form-control,
+.auth-card .form-select  {
+  background: rgba(8,8,24,0.8);
+  border: 1px solid var(--cosmos-border);
+  color: var(--cosmos-text);
+  border-radius: 10px;
+}
+.auth-card .form-control::placeholder { color: var(--cosmos-muted); }
+.auth-card .form-control:focus,
+.auth-card .form-select:focus {
+  background: rgba(8,8,24,0.9);
+  border-color: var(--cosmos-violet);
+  box-shadow: 0 0 0 3px rgba(176,104,255,0.2);
+  color: var(--cosmos-text);
+}
+.auth-card .input-group-text {
+  background: rgba(108,63,199,0.2);
+  border: 1px solid var(--cosmos-border);
+  color: var(--cosmos-violet);
+  border-radius: 10px 0 0 10px;
+}
+.auth-card .form-select option { background: #111130; color: var(--cosmos-text); }
+.auth-card h2 { color: var(--cosmos-white); }
+.auth-card .card { background: transparent; }
+
+/* Zodiac preview on register */
+.zodiac-preview {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(108,63,199,0.15);
+  border: 1px solid rgba(176,104,255,0.3);
+  border-radius: 10px;
+  padding: 10px 16px;
+  color: var(--cosmos-violet);
+  font-weight: 600;
+  animation: fadeIn .3s ease;
+}
+.zodiac-icon { font-size: 24px; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+
+/* ── Buttons ────────────────────────────────────────────────── */
+.btn-primary-cosmos {
+  background: var(--grad-primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all .25s ease;
+  box-shadow: 0 4px 16px rgba(108,63,199,0.4);
+}
+.btn-primary-cosmos:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(176,104,255,0.5);
+  color: #fff;
+  filter: brightness(1.1);
+}
+
+.link-accent { color: var(--cosmos-violet); }
+.link-accent:hover { color: var(--cosmos-gold); }
+.text-accent { color: var(--cosmos-violet) !important; }
+
+/* ── Dashboard ─────────────────────────────────────────────── */
+.dash-body {
+  background: var(--cosmos-bg);
+  min-height: 100vh;
+}
+
+/* Navbar */
+.dash-nav {
+  background: rgba(17, 17, 48, 0.95) !important;
+  border-bottom: 1px solid var(--cosmos-border);
+  backdrop-filter: blur(12px);
+  padding: 12px 0;
+}
+.dash-nav .navbar-brand { font-family: 'Cinzel', serif; font-size: 20px; letter-spacing: 2px; }
+.dash-nav .navbar-brand span { background: var(--grad-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.dash-nav .nav-link { color: var(--cosmos-muted) !important; font-weight: 500; border-radius: 8px; padding: 6px 14px !important; transition: all .2s; }
+.dash-nav .nav-link:hover,
+.dash-nav .nav-link.active { color: var(--cosmos-white) !important; background: rgba(176,104,255,0.12); }
+
+/* Dashboard header */
+.dash-header { padding: 20px 0 10px; }
+.zodiac-symbol {
+  font-size: 72px;
+  display: inline-block;
+  background: var(--grad-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 20px rgba(176,104,255,0.4));
+  animation: float 4s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+/* Main horoscope card */
+.horo-card {
+  background: var(--cosmos-card);
+  border: 1px solid var(--cosmos-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+}
+.horo-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--grad-primary);
+}
+.horo-card-header { border-bottom: 1px solid var(--cosmos-border); padding-bottom: 12px; }
+.horo-description {
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--cosmos-text);
+}
+
+/* Insight tiles */
+.insight-tile {
+  background: var(--cosmos-surface);
+  border: 1px solid var(--cosmos-border);
+  border-radius: 12px;
+  transition: transform .2s, box-shadow .2s;
+}
+.insight-tile:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+  border-color: rgba(176,104,255,0.4);
+}
+.insight-icon  { font-size: 28px; }
+.insight-label { font-size: 11px; color: var(--cosmos-muted); text-transform: uppercase; letter-spacing: 1px; margin: 4px 0 2px; }
+.insight-value { font-weight: 600; color: var(--cosmos-white); font-size: 14px; }
+
+/* Lucky time bar */
+.lucky-time-bar {
+  background: rgba(240,192,96,0.08);
+  border: 1px solid rgba(240,192,96,0.25);
+  border-radius: 12px;
+}
+.lucky-time-bar .text-accent { color: var(--cosmos-gold) !important; }
+
+/* Badge */
+.badge-sign {
+  background: var(--grad-primary);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ── History ────────────────────────────────────────────────── */
+.history-item {
+  background: var(--cosmos-card);
+  border: 1px solid var(--cosmos-border);
+  border-radius: var(--radius-card);
+  transition: transform .2s, box-shadow .2s;
+}
+.history-item:hover {
+  transform: translateX(4px);
+  box-shadow: var(--shadow-hover);
+  border-color: rgba(176,104,255,0.35);
+}
+.history-date-badge {
+  min-width: 52px;
+  background: var(--grad-primary);
+  border-radius: 10px;
+  padding: 10px 8px;
+  color: #fff;
+}
+.hist-day { font-size: 22px; font-weight: 700; line-height: 1; }
+.hist-mon { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+.hist-yr  { font-size: 10px; opacity: 0.8; }
+.history-desc {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--cosmos-text);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Pagination */
+.pagination .page-link {
+  background: var(--cosmos-surface);
+  border-color: var(--cosmos-border);
+  color: var(--cosmos-text);
+  border-radius: 8px !important;
+  margin: 0 2px;
+}
+.pagination .page-item.active .page-link { background: var(--grad-primary); border-color: transparent; color: #fff; }
+.pagination .page-link:hover { background: rgba(176,104,255,0.2); color: var(--cosmos-white); }
+
+/* Empty state */
+.empty-state-icon { font-size: 64px; }
+
+/* ── Profile ────────────────────────────────────────────────── */
+.profile-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--grad-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+/* General cards in dashboard */
+.dash-body .card {
+  background: var(--cosmos-card);
+  border: 1px solid var(--cosmos-border);
+  border-radius: var(--radius-card);
+  color: var(--cosmos-text);
+}
+.dash-body .form-control,
+.dash-body .form-select {
+  background: var(--cosmos-surface);
+  border: 1px solid var(--cosmos-border);
+  color: var(--cosmos-text);
+  border-radius: 10px;
+}
+.dash-body .form-control:focus,
+.dash-body .form-select:focus {
+  background: var(--cosmos-surface);
+  border-color: var(--cosmos-violet);
+  box-shadow: 0 0 0 3px rgba(176,104,255,0.2);
+  color: var(--cosmos-text);
+}
+.dash-body .form-label { color: var(--cosmos-muted); font-size: 13px; font-weight: 500; }
+.dash-body .form-control::placeholder { color: var(--cosmos-muted); }
+.dash-body .form-select option { background: #111130; color: var(--cosmos-text); }
+.dash-body .form-control:disabled { opacity: 0.5; }
+.dash-body h2, .dash-body h5, .dash-body h6 { color: var(--cosmos-white); }
+
+/* ── Alerts ─────────────────────────────────────────────────── */
+.alert-success {
+  background: rgba(76,175,130,0.12);
+  border: 1px solid rgba(76,175,130,0.4);
+  color: #6fd4a5;
+  border-radius: 10px;
+}
+.alert-danger {
+  background: rgba(224,92,106,0.12);
+  border: 1px solid rgba(224,92,106,0.4);
+  color: #f08090;
+  border-radius: 10px;
+}
+.alert-warning {
+  background: rgba(240,192,96,0.1);
+  border: 1px solid rgba(240,192,96,0.3);
+  color: var(--cosmos-gold);
+  border-radius: 10px;
+}
+.btn-close { filter: invert(1) brightness(2); }
+
+/* ── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cosmos-bg); }
+::-webkit-scrollbar-thumb { background: var(--cosmos-purple); border-radius: 10px; }
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 576px) {
+  .zodiac-symbol { font-size: 54px; }
+  .history-date-badge { min-width: 44px; }
+  .hist-day { font-size: 18px; }
+  .insight-tile { padding: 12px 8px !important; }
+}
